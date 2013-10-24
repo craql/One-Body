@@ -53,7 +53,7 @@ function onMapClick(e) {
 	geocode(
 		{latlng:e.latlng.lat+','+e.latlng.lng},
 		function(data){
-			if(data){
+			if(data && data.status != 'ZERO_RESULTS'){
 				var address = data.results[0].formatted_address;
 				var geo = data.results[0].geometry.location;
 				var point = new L.LatLng(geo.lat, geo.lng);
@@ -72,7 +72,7 @@ map.on('click', onMapClick);
 
 function user_geocode(form){
 	geocode({address:$('user_geocoder').value},function(data){
-		if(data){
+		if(data && data.status != 'ZERO_RESULTS'){
 			console.log(data);
 			var geo = data.results[0].geometry.location;
 			var point = new L.LatLng(geo.lat, geo.lng);
@@ -99,4 +99,40 @@ function geocode(data,callback){
 		method:'GET',
 		onsuccess:callback
 		})
+}
+var blueDot = new L.Icon({
+	iconUrl:'http://webapps-cdn.esri.com/graphics/branded/dots/point-blue.png',
+	iconSize:[16,16]
+})
+var greenDot = new L.Icon({
+	iconUrl:'http://webapps-cdn.esri.com/graphics/branded/dots/point-green.png',
+	iconSize:[16,16]
+})
+var markers = [];
+function addRandomMarker(){
+	function rLL(span){
+		return -span + (span*2)*Math.random();
+	}
+	var point = [rLL(90), rLL(180)];
+	var m = new L.Marker(point,{
+		title:point[0]+','+point[1],
+		riseOnHover:true,
+		icon:blueDot
+	})
+	.addTo(map)
+	.on('mouseover',function(e){
+		e.target.setIcon(greenDot);
+	})
+	.on('mouseout',function(e){
+		e.target.setIcon(blueDot);
+	});;
+	markers.push(m);
+	if(markers.length&100 ==0){
+		console.log('markers: '+markers.length);
+	}
+}
+var popInt;
+function populate(delay){
+	delay = delay || 50;
+	popInt = setInterval(addRandomMarker,delay);
 }
