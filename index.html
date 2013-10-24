@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.css" />
+<!--[if lte IE 8]>
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.ie.css" />
+<![endif]-->
+
+<script src="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.js"></script>
+<script src="js/libs/esri-leaflet.min.js"></script>
+<style>
+*{
+	margin:0;
+	padding:0;
+}
+html, body,  #map {
+        width : 100%;
+        height : 100%;
+      }
+	  
+	.panel{
+		position:absolute;
+		left:10px;
+		bottom:10px;
+		padding:5px;
+		background:#fff;
+		box-shadow:0 0 3px 0 rgba(0,0,0,.5);
+	}
+	
+/*Popups*/
+	.leaflet-popup-content-wrapper {
+    	border-radius: 0;
+    	border: 1px solid #ff8804;
+		border-top-width:20px;
+	}
+	.leaflet-popup-tip-container {
+		top: -1px;
+	}
+	#map .leaflet-popup-close-button {
+    	color: #fff;
+	}
+	#map .leaflet-popup-close-button:hover {
+    	color: #ccc;
+	}
+
+/*Controls*/	
+	.leaflet-touch .leaflet-control-layers, .leaflet-touch .leaflet-bar {
+    	border: 1px solid #007ac2;
+    	border-radius: 0px;
+    	box-shadow: 0 0 3px 0 rgba(0,0,0,.5);
+	}
+	#map .leaflet-control a {
+		border-radius: 0;
+	}
+</style>
+
+<title>One Body Home</title>
+</head>
+
+<body>
+
+<div id="map"></div>
+<div class="panel"> One Body</div>
+<script>
+var streets   = L.esri.basemapLayer("Streets"),
+    topo  = L.esri.basemapLayer("Topographic"),
+    gray = L.esri.basemapLayer("Gray"),
+	labels = L.esri.basemapLayer("GrayLabels");
+	
+	var grayMap = L.layerGroup([gray, labels]);
+	
+var map = L.map('map',{
+	center: new L.LatLng(39.73, -104.99),
+	zoom:13,
+	layers:[grayMap]
+});
+
+	var baseMaps = {
+    	"Streets": streets,
+    	"Topographic": topo,
+		"Gray": grayMap
+	};
+	
+	L.control.layers(baseMaps).addTo(map);
+	
+// ArcGIS Online Basemaps - Streets, Topographic, Gray, GrayLabels, Oceans, NationalGeographic, Imagery, ImageryLabels
+//      L.esri.basemapLayer("Streets").addTo(map);
+var popup = L.popup();
+function onMapClick(e) {
+	console.log(e);
+   // alert("You clicked the map at " + e.latlng);
+	 popup
+        .setLatLng(e.latlng)
+        .setContent("You clicked the map at " + e.latlng.toString())
+        .openOn(map);
+}
+
+map.on('click', onMapClick);
+
+</script>
+</body>
+</html>
