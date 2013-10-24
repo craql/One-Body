@@ -1,0 +1,32 @@
+{
+  "name": "Geo-Users",
+  "version": "0.1.0",
+  "author": "Craql <corey@craql.com>",
+  "description": "A User module that does live geocoding.",
+  "contributors": [ 
+    {
+      "name": "Liz Hadden",
+      "email": "evhadden@gmail.com"
+    } 
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/craql/One-Body.git"
+  },
+  "keywords": [
+    "users",
+    "geo-enabled",
+	"sockets"
+  ],
+  "dependencies" : {
+    "node-dev"   :  "*",
+    "socket.io" :  "*",
+    "request" :  "*"
+  },
+  "analyze": false,
+  "devDependencies": {
+    "vows"    :  "0.5.x",
+    "request" :  "2.1.x"
+  },
+  "license": "MIT"
+}
