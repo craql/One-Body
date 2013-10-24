@@ -41,6 +41,7 @@ function initMap(){
 initMap();
 function findUser(){
 		map.locate({setView:true});
+		return false;
 }
 function onMapClick(e) {
 	console.log(e);
@@ -135,4 +136,9 @@ var popInt;
 function populate(delay){
 	delay = delay || 50;
 	popInt = setInterval(addRandomMarker,delay);
+	return false;
+}
+
+function stopPopulate(){
+	clearInterval(popInt);
 }

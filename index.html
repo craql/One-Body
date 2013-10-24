@@ -2,6 +2,8 @@
 <html>
 <head>
 <meta charset="utf-8">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="viewport" content="width=device-width, user-scalable=no,initial-scale=1.0">
 <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.css" />
 <!--[if lte IE 8]>
     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.ie.css" />
@@ -21,7 +23,11 @@
 <div class="panel"> 
     <div class="panel-label">One Body</div>
     <div class="panel-content">    
-        <a onclick="findUser();" href=""> find me</a>
+        <a onclick="findUser();" href="#"> show me</a> |
+        <a onclick="populate();" href="#"> populate</a> |
+        <a onclick="stopPopulate();" href="#"> stop</a>
+        
+        
         <form onsubmit='return user_geocode(this);'>
             <input name="user_geocoder" id="user_geocoder" type="text" placeholder="find location"/>
         </form>
