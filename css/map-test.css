@@ -65,3 +65,13 @@ html, body,  #map {
 	.leaflet-control-attribution{
 		display:none;
 	}
+	
+	#login-panel{
+		top: 20px;
+		left: 50px;
+		bottom: auto;
+		padding: 5px;
+		width: auto;
+		right: auto;
+		max-width: none;
+	}
