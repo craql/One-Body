@@ -8,11 +8,28 @@
 <!--[if lte IE 8]>
     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.ie.css" />
 <![endif]-->
+<script src="http://localhost:1203/socket.io/socket.io.js"></script>
 
 <script src="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.js"></script>
 <script src="js/libs/esri-leaflet.min.js"></script>
+<script src="js/libs/jquery-1.10.2.min.js"></script>
 <script src="js/libs/craydent-1.7.15.js"></script>
+
 <link rel="stylesheet" href="css/map-test.css" />
+
+<script>
+var socket = io.connect('http://localhost:1203',{user:'craql',pass:'test'});
+socket.on('authenticated',onAuthentication);
+
+function onAuthentication(data){
+	//alert('authenticated');
+	socket.on('api',function(data){
+		window.API = data.api;
+	})
+	
+	
+}
+</script>
 
 <title>One Body Home</title>
 </head>

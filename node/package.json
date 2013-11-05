@@ -23,10 +23,6 @@
     "socket.io" :  "*",
     "request" :  "*"
   },
-  "analyze": false,
-  "devDependencies": {
-    "vows"    :  "0.5.x",
-    "request" :  "2.1.x"
-  },
+  "analyze": true,
   "license": "MIT"
 }
